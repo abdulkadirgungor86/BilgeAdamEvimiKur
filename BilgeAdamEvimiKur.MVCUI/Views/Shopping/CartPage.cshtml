@@ -1,0 +1,68 @@
+﻿@model CartPageVM
+@section UserName {
+    @ViewBag.UserName
+}
+
+<p>
+    <b>
+        @TempData["Result"]
+    </b>
+</p><br/>
+
+<div class="row product-list">
+    @foreach (CartItem item in Model.CartItems)
+    {
+        <div class="col-md-3">
+            <section class="panel">
+                <div class="pro-img-box">
+                    <img src="@item.ImagePath" />
+                    <a asp-action="DeleteFromCart" asp-route-id="@item.ID" class="adtocart">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </a>
+                </div>
+                <div class="panel-body text-center">
+                    <h4>
+                        <a asp-action="Index" asp-route-categoryID="@item.CategoryID" class="pro-title" title=" @item.CategoryName kategorisi ürünler için tıklayınız.">
+                            @item.ProductName x @item.Amount
+                        </a>
+                    </h4>
+                    <p class="price">@item.UnitPrice.ToString("C2") </p>
+                    <a asp-action="DecreaseFromCart" asp-route-id="@item.ID">
+                        <i class="glyphicon glyphicon-minus"></i>
+                    </a>
+                </div>
+            </section>
+        </div>    
+    }
+</div>
+<div class="jumbotron">
+    Toplam Fiyat = @Model.TotalPrice.ToString("C2") 
+    <br />
+    <a asp-action="ConfirmOrder" asp-controller="Shopping" class="btn btn-primary">Ödemek için buraya tıklayınız</a>
+</div>
+
+@section Sepet {
+    @if (ViewBag.UserName == " Guest ")
+    {
+        <li>
+            <a asp-controller="User" asp-action="SignIn"><i class="icon-user"></i>&nbsp;&nbsp;&nbsp;SignIn</a>
+        </li>
+    }
+
+    <li>
+        <a asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+
+    @if (ViewBag.UserName != " Guest ")
+    {
+        <li>
+            <a asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+        </li>
+    }
+}

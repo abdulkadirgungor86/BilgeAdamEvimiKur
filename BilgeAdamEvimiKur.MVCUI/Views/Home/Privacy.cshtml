@@ -1,0 +1,59 @@
+﻿@section UserName {
+@ViewBag.UserName
+}
+
+
+<div class="text-center">
+    <h1 class="display-1">Privacy Page</h1>
+    <p>
+        <b>
+            @TempData["Result"]
+        </b></p></br></br>
+    <p>
+        Lorem ipsum odor amet, consectetuer adipiscing elit. Phasellus himenaeos fames et tellus tellus magnis. Penatibus faucibus eleifend porta sociosqu taciti; sociosqu aliquet sem. Hac in curabitur adipiscing blandit mollis, habitasse diam ac. Accumsan porta ultrices dapibus fringilla ut eget nascetur luctus. Venenatis pulvinar metus aptent maximus interdum dapibus taciti. Duis risus ut egestas vivamus a posuere torquent lectus molestie.
+
+        Tincidunt euismod cras sagittis tortor non class laoreet est. Bibendum sapien magnis libero varius leo varius velit mollis. Mattis felis ut potenti tincidunt gravida velit inceptos aptent. Dolor habitasse tortor nam condimentum fermentum urna. Sagittis dictum sed potenti primis est. Auctor dui sodales lobortis hac ante.
+
+        Quis netus curabitur ultrices euismod neque nascetur. Nibh scelerisque ac ut nibh accumsan himenaeos gravida. Lacus porttitor eget erat ornare condimentum dignissim. Odio velit arcu at dignissim pulvinar. Accumsan massa volutpat integer, urna augue tempor lorem sollicitudin parturient. Tortor penatibus mauris efficitur turpis et aliquet. Risus dignissim ad egestas convallis felis in. Mus tortor risus auctor netus duis tempus sapien erat lorem.
+
+        Leo id viverra viverra arcu sem hac morbi. Suscipit nulla hac placerat dapibus purus. Curabitur dolor litora aliquet habitant purus est. Porta nisi nostra venenatis phasellus ligula potenti. Integer commodo ultrices tellus molestie finibus iaculis, est egestas nisi. Sodales adipiscing per gravida sodales ullamcorper lacus dis placerat mattis. Potenti mollis per tellus; potenti sagittis inceptos magnis laoreet non. Conubia viverra duis curae hac nunc nisl dui mollis rhoncus. Aenean dis inceptos ac metus maximus aptent. At rutrum nam mus vel pharetra libero pellentesque lobortis turpis.
+
+        Ridiculus amet imperdiet taciti natoque dui. Id vitae duis in posuere proin turpis. Sed ipsum placerat, ridiculus mattis duis lobortis leo. Proin vivamus eget molestie vehicula nam finibus. Metus velit feugiat dignissim elementum sociosqu faucibus porttitor mus diam. Hac ullamcorper mi netus suspendisse; morbi fermentum adipiscing. Id habitasse morbi in magna condimentum sem. Mauris sed condimentum penatibus placerat montes nibh erat. Pellentesque tellus accumsan elementum venenatis elementum erat montes. Iaculis sodales est malesuada faucibus, condimentum himenaeos taciti varius porttitor.
+
+        Metus sociosqu amet habitasse vehicula euismod mi; amet rhoncus habitasse. Urna auctor leo blandit consequat, ultrices quisque cras. Luctus netus in vitae quisque porta metus erat dapibus. Lorem conubia efficitur lobortis, iaculis mattis natoque orci aptent rhoncus. Aproin volutpat at natoque tortor arcu quisque. Nulla scelerisque justo penatibus dapibus lacinia, ante quisque eu. Varius scelerisque facilisis in porttitor non fames.
+
+        Tempus class a risus nam nisi maximus montes. Praesent velit viverra blandit natoque odio hendrerit nisl porttitor habitasse. Quis finibus volutpat sollicitudin bibendum pulvinar. Eros inceptos maecenas pharetra bibendum ad viverra. Viverra duis ad mauris litora facilisis vel aliquet aptent. Integer facilisi eget ipsum vivamus aptent maximus aenean tortor penatibus. Dolor nostra sapien tincidunt litora; tempus in nunc libero. Dictumst magnis vitae nibh praesent placerat porttitor elit dolor.
+
+        Maecenas tristique tortor montes taciti taciti facilisis justo conubia. Velit magnis quisque facilisis viverra pulvinar libero nam. Praesent sed posuere gravida venenatis penatibus enim est. Mattis quis neque ridiculus mus dapibus cras. Enim montes primis cursus et aliquet molestie sodales odio. Praesent velit sit tempus pretium dictumst phasellus. Felis potenti ut montes enim metus blandit aliquet congue. Dictum himenaeos fringilla nulla quis ullamcorper metus ultrices. Ultricies curabitur penatibus ligula gravida metus ac inceptos mi montes. Efficitur at penatibus ac dis leo.
+
+        Etiam dolor habitasse senectus venenatis gravida pulvinar parturient. Proin nostra penatibus posuere sapien consequat. Ultricies gravida per tellus morbi cras platea interdum. Ac torquent hac bibendum integer; at habitasse sollicitudin finibus. Luctus varius dignissim hendrerit a ullamcorper erat diam praesent. Est mauris sodales a conubia sagittis gravida orci pulvinar.
+
+        Conubia conubia tristique risus elit etiam. Ultrices hendrerit lectus praesent, euismod duis primis aliquam laoreet netus. At aenean dolor netus congue vestibulum nisi euismod. Pharetra molestie erat sociosqu dolor magnis. Ipsum neque mattis mauris quisque magnis himenaeos. Commodo faucibus nibh himenaeos commodo diam. Aliquet egestas lorem parturient risus vestibulum diam condimentum imperdiet inceptos. Finibus nullam auctor tempor viverra magnis lacus curae quam. Potenti consectetur lacinia senectus dolor mi condimentum penatibus. Pellentesque mus velit consectetur, netus arcu ut.
+     </p>
+</div>
+
+@section Sepet {
+    @if (ViewBag.UserName == " Guest ")
+    {
+        <li>
+            <a asp-controller="User" asp-action="SignIn"><i class="icon-user"></i>&nbsp;&nbsp;&nbsp;SignIn</a>
+        </li>
+    }
+
+    <li>
+        <a asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+
+    @if (ViewBag.UserName != " Guest ")
+    {
+        <li>
+            <a asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+        </li>
+    }
+}

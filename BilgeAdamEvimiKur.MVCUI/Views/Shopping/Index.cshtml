@@ -1,0 +1,146 @@
+﻿
+@model ShoppingPageVM
+
+@section UserName {
+    @ViewBag.UserName
+}
+
+<div style="text-align: center;">
+    <p>
+        <b>
+            @TempData["Result"]
+        </b>
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <section class="panel">
+            <header class="panel-heading">
+                <h4><bold><a asp-controller="Shopping" asp-action="Index"> Ana Kategoriler</a></bold></h4>
+            </header>
+            <div class="panel-body">
+                <ul class="nav prod-cat">
+                    @foreach (CategoryResModel item in Model.Categories)
+                    {
+                        <li style="padding-top:30px">
+                            <a asp-controller="Shopping" asp-action="Index" asp-route-categoryID="@item.ID">@item.CategoryName</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </section>
+        <section class="panel">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <ul class="pagination pagination-sm pro-page-list">
+                        <li>
+                            @if(TempData["PageNumber"] == null)
+                            {
+                                @Html.PagedListPager(Model.Categories, categoryPageNumber => Url.Action("Index", new { categoryPageNumber }))
+                            } else
+                            {
+                                @Html.PagedListPager(Model.Categories, categoryPageNumber => Url.Action("Index", new { pageNumber = TempData["PageNumber"], categoryPageNumber = categoryPageNumber }))
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-9">
+        <div class="row product-list">
+            @foreach (ProductResModel item in Model.Products)
+            {
+                <div class="col-md-3">
+                    <section class="panel">
+                        <div class="pro-img-box">
+                            <img src="@item.ImagePath" />
+                            <a asp-action="AddToCart" asp-route-id="@item.ID" class="adtocart">
+                                <i class="icon-shopping-cart" ></i>
+                            </a>
+                        </div>
+                        <div class="panel-body text-center">
+                            <h4>
+
+                                <a class="pro-title">
+                                    @item.ProductName
+                                </a>
+                                <br />
+                                @if (item.CategoryName == null)
+                                {
+                                    <a class="pro-lab">
+                                        Category : -
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="pro-lab">
+                                        Category : @item.CategoryName
+                                    </a>
+                                }
+                                <br />
+                                @if (item.SupplierName == null)
+                                {
+                                    <a class="pro-lab">
+                                       Supplier : -
+                                    </a>
+                                } else
+                                {
+                                    <a class="pro-lab">
+                                        Supplier : @item.SupplierName
+                                    </a>
+                                }
+                            </h4>
+
+                            <p class="price">Price : @item.Price.ToString("C2") </p>
+                        </div>
+                    </section>
+                </div>
+            }
+        </div>
+    </div>
+    <section class="panel">
+        <div class="panel-body">
+            <div class="pull-right">
+                <ul class="pagination pagination-sm pro-page-list">
+                    @if (TempData["CategoryID"] == null)
+                    {
+                        @Html.PagedListPager(Model.Products, pageNumber => Url.Action("Index", new { pageNumber }))
+                    }
+                    else
+                    {
+                        <li>
+                            @Html.PagedListPager(Model.Products, pageNumber => Url.Action("Index", new { pageNumber, categoryID = TempData["CategoryID"] }))
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Sepet {
+    @if (ViewBag.UserName == " Guest ")
+    {
+        <li>
+            <a asp-controller="User" asp-action="SignIn"><i class="icon-user"></i>&nbsp;&nbsp;&nbsp;SignIn</a>
+        </li>
+    }
+
+    <li>
+        <a asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+
+    @if (ViewBag.UserName != " Guest ")
+    {
+        <li>
+            <a asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+        </li>
+    }
+}

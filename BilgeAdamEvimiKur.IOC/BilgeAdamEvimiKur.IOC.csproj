@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BilgeAdamEvimiKur.BLL\BilgeAdamEvimiKur.BLL.csproj" />
+    <ProjectReference Include="..\BilgeAdamEvimiKur.COMMON\BilgeAdamEvimiKur.COMMON.csproj" />
+    <ProjectReference Include="..\BilgeAdamEvimiKur.MAP\BilgeAdamEvimiKur.MAP.csproj" />
+    <ProjectReference Include="..\BilgeAdamEvimiKur.VALIDATION\BilgeAdamEvimiKur.VALIDATION.csproj" />
+  </ItemGroup>
+
+</Project>

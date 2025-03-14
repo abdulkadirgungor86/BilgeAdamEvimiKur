@@ -1,0 +1,59 @@
+﻿@model AppUserProfileReqModel
+
+@section UserName {
+    @ViewBag.UserName
+}
+
+<p>
+    <b>
+        @TempData["Result"]
+    </b>
+</p></br></br>
+
+<form asp-action="UserProfile" asp-controller="UserProfile" method="post" class="p-3 w-75 m-auto">
+    <div class="mb-3">
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+        <input type="hidden" asp-for="UserName" value="@Model.UserName" />
+        <h2>Kullanıcı Profili</h2>
+        <br />
+        <label>UserName : @Model.UserName </label>
+        <br /> <br />
+        <label> İsim </label>
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+        <input asp-for="FirstName" class="form-control" placeholder="İsim" />
+    </div><br />
+    <div class="mb-3">
+        <label> Soyİsim </label>
+        <span asp-validation-for="LastName" class="text-danger"></span>
+        <input asp-for="LastName" class="form-control" placeholder="Soyİsim" />
+    </div><br />
+    <div class="mb-3">
+        <button class="btn btn-primary">&nbsp;&nbsp;&nbsp; Profilini Güncelle &nbsp;&nbsp;&nbsp;</button>
+    </div>
+</form>
+
+@section Sepet {
+    @if (ViewBag.UserName == " Guest ")
+    {
+        <li>
+            <a asp-controller="User" asp-action="SignIn"><i class="icon-user"></i>&nbsp;&nbsp;&nbsp;SignIn</a>
+        </li>
+    }
+
+    <li>
+        <a asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+
+    @if (ViewBag.UserName != " Guest ")
+    {
+        <li>
+            <a asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+        </li>
+    }
+}

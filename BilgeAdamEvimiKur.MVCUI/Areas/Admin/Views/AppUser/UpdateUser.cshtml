@@ -1,0 +1,79 @@
+﻿@model UpdateUserPageModel
+
+@section UserName {
+    @ViewBag.UserName
+}
+
+<p>
+    <b>
+        @TempData["Result"]
+    </b>
+</p></br></br>
+
+
+<form asp-action="UpdateUser" asp-controller="appUser" method="post" class="p-3 w-75 m-auto">
+    <input type="hidden" asp-for="UpdateUserModel.Id" value="@Model.UpdateUserModel.Id" />
+    <div class="mb-3">
+        <label>Kullanıcı Adı</label>
+        <span asp-validation-for="UpdateUserModel.UserName" class="text-danger"></span>
+        <input asp-for="UpdateUserModel.UserName" class="form-control" placeholder="Kullanıcı Adı" />
+    </div><br />
+
+    <div class="mb-3">
+        <label>New Password</label>
+        <span asp-validation-for="UpdateUserModel.NewPassword" class="text-danger"></span>
+        <input asp-for="UpdateUserModel.NewPassword" class="form-control" type="password" placeholder="Yeni Password" />
+    </div><br />
+    <div class="mb-3">
+        <label>Email</label>
+        <span asp-validation-for="UpdateUserModel.Email" class="text-danger"></span>
+        <input asp-for="UpdateUserModel.Email" class="form-control" placeholder="Email" />
+    </div><br />
+    <div class="mb-3">
+        <label>
+            Kullanıcı Rolleri :
+            @{
+                bool first = true;
+            }
+            @foreach (string role in Model.UpdateUserModel.RoleNames)
+            {
+                if (!first)
+                {
+                    @:, &nbsp;
+                }
+                first = false;
+                @role
+            }
+            </td>
+        </label>
+    </div><br />
+    <section>
+        <div class="mb-3">
+            <button class="btn btn-primary" name="action" value="updateUser">Kullanıcıyı Güncelle</button>
+        </div>
+    </section>
+        <br /><br /><br /><br />
+        <label>Kullanıcı Rolleri</label>
+        <span asp-validation-for="UpdateUserModel.NewRoleName" class="text-danger"></span><br />
+        <select asp-for="UpdateUserModel.NewRoleName" asp-items='new SelectList(Model.AppRoleResModels,"Name","Name")'>
+            <option value="">Seçiniz</option>
+        </select>
+        &nbsp;<button type="submit" name="action" value="addRole">Rol Ekle</button>&nbsp;
+        <button type="submit" name="action" value="removeRole">Rol Çıkar</button>
+ </form>
+
+
+@section Sepet {
+    <li>
+        <a asp-area="" asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+    </li>
+ }

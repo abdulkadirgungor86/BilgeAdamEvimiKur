@@ -1,0 +1,77 @@
+﻿@model IPagedList<GetAppUserProfileResModel>
+
+
+@section UserName {
+    @ViewBag.UserName
+}
+
+<p>
+    <b>
+        @TempData["Result"]
+    </b>
+</p></br></br>
+
+<section class="panel">
+    <header class="panel-heading">
+        <h2>Kullanıcı Profilleri</h2>
+    </header>
+    <div class="panel-body">
+        <div class="adv-table">
+            <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+                <thead>
+                    <tr>
+                        <th class="hidden-phone">ID</th>
+                        <th class="hidden-phone">UserName</th>
+                        <th class="hidden-phone">First Name</th>
+                        <th class="hidden-phone">Last Name</th>
+                        <th class="hidden-phone">Status</th>
+                        <th class="hidden-phone">Update</th>
+                        <th class="hidden-phone">Delete</th>
+                        <th class="hidden-phone">Destroy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (GetAppUserProfileResModel item in Model.ToList())
+                    {
+                        <tr class="gradeX">
+                            <td class="hidden-phone">@item.Id</td>
+                            <td class="hidden-phone">@item.UserName</td>
+                            <td class="hidden-phone">@item.FirstName</td>
+                            <td class="hidden-phone">@item.LastName</td>
+                            <td class="hidden-phone">@item.Status</td>
+                            <td class="center hidden-phone"><a asp-action="UpdateAppUser" asp-Contoller="AppUserProfile" asp-route-id="@item.Id" class="btn btn-success">Update</a></td>
+                            <td class="center hidden-phone"><a asp-action="DeleteAppUser" asp-Contoller="AppUserProfile" asp-route-id="@item.Id" class="btn btn-warning">Delete</a></td>
+                            <td class="center hidden-phone"><a asp-action="DestroyAppUser" asp-Contoller="AppUserProfile" asp-route-id="@item.Id" class="btn btn-danger">Destroy</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>
+
+<section class="panel">
+    <div class="panel-body">
+        <div class="pull-right">
+            <ul class="pagination pagination-sm pro-page-list">
+                @Html.PagedListPager(Model, pageNumber => Url.Action("GetUserProfiles", new { pageNumber }))
+            </ul>
+        </div>
+    </div>
+</section>
+
+@section Sepet {
+    <li>
+        <a asp-area="" asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+    </li>
+ }

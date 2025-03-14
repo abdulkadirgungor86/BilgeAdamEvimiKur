@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BilgeAdamEvimiKur.DTO\BilgeAdamEvimiKur.DTO.csproj" />
+    <ProjectReference Include="..\BilgeAdamEvimiKur.ENTITIES\BilgeAdamEvimiKur.ENTITIES.csproj" />
+    <ProjectReference Include="..\BilgeAdamEvimiKur.VIEWMODEL\BilgeAdamEvimiKur.VIEWMODEL.csproj" />
+  </ItemGroup>
+
+</Project>

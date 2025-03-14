@@ -1,0 +1,139 @@
+﻿@model UpdateProductPageVM
+
+@section UserName {
+    @ViewBag.UserName
+}
+
+<p>
+    <b>
+        @TempData["Result"]
+    </b>
+</p></br></br>
+
+<form asp-action="UpdateProduct" asp-controller="Product" method="post" class="p-3 w-75 m-auto" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Product.ID" value="@Model.Product.ID" />
+    <input type="hidden" asp-for="Product.ImagePath" value="@Model.Product.ImagePath" />
+    <section>
+        <div class="mb-3">
+            <label>Kategori</label>
+            <div>
+                @if (Model.Categories != null && Model.Categories.Any())
+                {
+                    <span asp-validation-for="Product.CategoryID" class="text-danger"></span>
+
+                    <br />
+                    <select asp-for="Product.CategoryID" asp-items='new SelectList(Model.Categories,"ID","CategoryName")'>
+                        <option value="">Seçiniz</option>
+                    </select>
+                }
+                else
+                {
+                    <p>
+                        <b>
+                            Kategori yok yada yüklenemedi.
+                        </b>
+                    </p>
+                }
+            </div>
+        </div>
+    </section>
+    </br>
+    <section>
+        <div class="mb-3">
+            <label>Tedarikçi</label>
+            <div>
+                @if (Model.Suppliers != null && Model.Suppliers.Any())
+                {
+                    <span asp-validation-for="Product.SupplierID" class="text-danger"></span>
+
+                    <br />
+                    <select asp-for="Product.SupplierID" asp-items='new SelectList(Model.Suppliers,"ID","SupplierName")'>
+                        <option value="">Seçiniz</option>
+                    </select>
+                }
+                else
+                {
+                    <p>
+                        <b>
+                            Tedarikçi yok yada yüklenemedi.
+                        </b>
+                    </p>
+                }
+            </div>
+        </div>
+    </section>
+    </br>
+    <section>
+        <div class="mb-3">
+            <label>Ürün İsmi</label>
+            <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+            <input asp-for="Product.ProductName" class="form-control" placeholder="Ürün Adı" />
+        </div>
+    </section>
+    </br>
+    <section>
+        <div class="mb-3">
+            <label>Fiyatı</label>
+            <span asp-validation-for="Product.Price" class="text-danger"></span>
+            <input asp-for="Product.Price" class="form-control" placeholder="Ürün Fiyatı" />
+        </div>
+    </section>
+    </br>
+    <section>
+        <div class="mb-3">
+            <label>Stok miktarı</label>
+            <span asp-validation-for="Product.UnitsInStock" class="text-danger"></span>
+            <input asp-for="Product.UnitsInStock" class="form-control" placeholder="Stoktaki Ürün Miktarı" />
+        </div>
+    </section>
+    </br>
+    @if ( (@Model.Product.ImagePath==null) || (@Model.Product.ImagePath.Trim()=="")  )
+    {
+        <section>
+            <div class="mb-3">
+                <p>
+                    <b>
+                        Resim bulunamadı.
+                    </b>
+                </p>
+            </div>
+        </section>
+    } else
+    {
+        <section>
+            <div class="mb-3">
+                <label>Ürün Resmi</label><br />
+                <img src="@Model.Product.ImagePath" />
+            </div>
+        </section>
+        <br />
+    }
+
+    <section>
+        <div class="mb-3">
+            <label>Resim Dosyası Seçiniz</label>
+            <input type="file" name="formFile" class="form-control"  />
+        </div>
+    </section>
+    </br>
+    <section>
+        <div class="mb-3">
+            <button class="btn btn-primary">Ürünü Güncelle</button>
+        </div>
+    </section>
+</form>
+
+@section Sepet {
+    <li>
+        <a asp-area="" asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+    </li>
+ }

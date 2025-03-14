@@ -1,0 +1,130 @@
+﻿@model UserRegisterReqModel
+@section UserName {
+    @ViewBag.UserName
+}
+
+<div class="text-center">
+    <p><b>@TempData["Result"]</b></p>
+    <form asp-action="Register" asp-controller="User" id="registerJS" method="post" class="p-3 w-25 m-auto">
+        <div class="login-wrap">
+            <h1 class="display-1">Register</h1>
+            <div class="mb-2">
+                <span asp-validation-for="UserName" id="userNameJSError" class="text-danger"></span>
+                <input asp-for="UserName" type="text" id="userNameJS" class="form-control" placeholder="UserName" /><br />
+            </div>
+            <div class="mb-2">
+                <span asp-validation-for="Password" id="passwordJSError" class="text-danger"></span>
+                <input asp-for="Password" type="password" id="passwordJS" class="form-control" placeholder="Password" /><br />
+            </div>
+            <div class="mb-2">
+                <span asp-validation-for="ConfirmPassword" id="confirmPasswordJSError" class="text-danger"></span>
+                <input asp-for="ConfirmPassword" type="password" id="confirmPasswordJS" class="form-control" placeholder="Confirm Password" /><br />
+            </div>
+            <div class="mb-2">
+                <span asp-validation-for="Email" id="emailJSError" class="text-danger"></span>
+                <input asp-for="Email" type="email" class="form-control" id="emailJS" placeholder="Email" /><br />
+            </div>
+            <div class="mb-2">
+                <span asp-validation-for="ConfirmEmail" id="confirmEmailJSError" class="text-danger"></span>
+                <input asp-for="ConfirmEmail" type="email" id="confirmEmail" class="form-control" placeholder="Confirm Email" /><br />
+            </div>
+            <div class="mb-2">
+                <button class="btn btn-primary">Kayıt Ol!</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('registerJS').addEventListener('submit', function (event) {
+        var isValid = true;
+
+        // Username validation
+        var userNameJS = document.getElementById('userNameJS').value;
+        var userNameJSError = document.getElementById('userNameJSError');
+        userNameJSError.textContent = '';
+
+        if (!userNameJS) {
+            userNameJSError.textContent = 'Kullanıcı adı boş bırakılamaz.';
+            isValid = false;
+        }
+
+        // Password validation
+        var passwordJS = document.getElementById('passwordJS').value;
+        var passwordJSError = document.getElementById('passwordJSError');
+        passwordJSError.textContent = '';
+
+        if (!passwordJS) {
+            passwordJSError.textContent = 'Password alanı boş bırakılamaz.';
+            isValid = false;
+        }
+
+        // Confirm Password validation
+        var confirmPasswordJS = document.getElementById('confirmPasswordJS').value;
+        var confirmPasswordJSError = document.getElementById('confirmPasswordJSError');
+        confirmPasswordJSError.textContent = '';
+
+        if (!confirmPasswordJS) {
+            confirmPasswordJSError.textContent = 'Password tekrar alanı boş bırakılamaz.';
+            isValid = false;
+        } else if (confirmPasswordJS !== passwordJS) {
+            confirmPasswordJSError.textContent = 'Password tekrar eşleşmiyor.';
+            isValid = false;
+        }
+
+        // Email validation
+        var emailJS = document.getElementById('emailJS').value;
+        var emailJSError = document.getElementById('emailJSError');
+        emailJSError.textContent = '';
+
+        if (!emailJS) {
+            emailJSError.textContent = 'Email alanı boş bırakılamaz.';
+            isValid = false;
+        }
+
+        // Confirm Email validation
+        var confirmEmailJS = document.getElementById('confirmEmail').value;
+        var confirmEmailJSError = document.getElementById('confirmEmailJSError');
+        confirmEmailJSError.textContent = '';
+
+        if (!confirmEmailJS) {
+            confirmEmailJSError.textContent = 'Email tekrar alanı boş bırakılamaz.';
+            isValid = false;
+        } else if (confirmEmailJS !== emailJS) {
+            confirmEmailJSError.textContent = 'Email tekrar eşleşmiyor.';
+            isValid = false;
+        }
+
+        // Prevent form submission if any validation fails
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+</script>
+
+@section Sepet {
+    @if (ViewBag.UserName == " Guest ")
+    {
+        <li>
+            <a asp-controller="User" asp-action="SignIn"><i class="icon-user"></i>&nbsp;&nbsp;&nbsp;SignIn</a>
+        </li>
+    }
+
+    <li>
+        <a asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+
+    @if (ViewBag.UserName != " Guest ")
+    {
+        <li>
+            <a asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+        </li>
+    }
+}

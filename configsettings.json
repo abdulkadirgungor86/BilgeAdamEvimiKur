@@ -1,0 +1,16 @@
+{
+
+  // Email Ayarları
+  "senderEmail": "gungorabdulkadir705@gmail.com", // Mail ayarları Gmail'e göre yapilandirilmistir.
+  "senderEmailPassword": "xxxxxxxxxxxxxxxx",
+  "senderEmailHost": "smtp.gmail.com",
+  "senderEmailPort": "587",
+  "senderEmailEnableSsl": "true",
+  "senderEmailDeliveryMethod": "SmtpDeliveryMethod.Network",
+  "senderEmailUseDefaultCredentials": "false",
+
+  // URL Ayarları
+  "confirmEmailUrl": "http://localhost:5178/user/ConfirmEmail?specId=",
+  "creditCardApiUrl": "http://cz29ay3z1wg0000wvbyggxtrixryyyyyb.oast.pro"  //https://requestbin.net/ adresinden temin edilmistir. 
+
+}

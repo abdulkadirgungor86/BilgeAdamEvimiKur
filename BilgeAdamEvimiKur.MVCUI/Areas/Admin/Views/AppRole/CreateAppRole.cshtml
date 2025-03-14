@@ -1,0 +1,45 @@
+﻿@model CreateAppRoleReqModel
+
+@section UserName {
+    @ViewBag.UserName
+}
+
+<p>
+    <b>
+        @TempData["Result"]
+    </b>
+</p></br></br>
+
+
+<form asp-action="CreateAppRole" asp-controller="AppRole" method="post" class="p-3 w-75 m-auto">
+    <div class="mb-3">
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <input asp-for="Name" class="form-control" placeholder="Rol İsmi" />
+    </div><br />
+    <div class="mb-3">
+        <span asp-validation-for="NormalizedName" class="text-danger"></span>
+        <input asp-for="NormalizedName" class="form-control" placeholder="Normalleştirmiş Ad" />
+    </div><br />
+    <div class="mb-3">
+        <button class="btn btn-primary">&nbsp;&nbsp;&nbsp; Kullanıcı Rolü Ekle &nbsp;&nbsp;&nbsp;</button>
+    </div>
+</form>
+<br /><br /><br /><br />
+<div class="mb-3">
+    <a asp-action="GetAppRoles" asp-controller="AppRole" class="btn btn-primary">KullanıcI Rollerini Göster</a>
+</div>
+
+@section Sepet {
+    <li>
+        <a asp-area="" asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+    <li>
+            <a asp-area="" asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+    </li>
+    <li>
+        <a asp-area=""  asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+    </li>
+    <li>
+            <a asp-area="" asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+    </li>
+ }

@@ -1,0 +1,67 @@
+﻿@model CreateSupplierReqModel
+
+@section UserName {
+    @ViewBag.UserName
+}
+
+<p>
+    <b>
+        @TempData["Result"]
+    </b>
+</p></br></br>
+
+<form asp-action="CreateSupplier" asp-controller="Supplier" method="post" class="p-3 w-75 m-auto">
+    <div class="mb-3">
+        <span asp-validation-for="SupplierName" class="text-danger"></span>
+        <input asp-for="SupplierName" class="form-control" placeholder="SupplierName" />
+    </div><br />
+    <div class="mb-3">
+        <span asp-validation-for="ContactName" class="text-danger"></span>
+        <input asp-for="ContactName" class="form-control" placeholder="ContactName" />
+    </div><br />
+    <div class="mb-3">
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <input asp-for="Email" type="email" class="form-control" placeholder="Email" />
+    </div><br />
+    <div class="mb-3">
+        <span asp-validation-for="Phone" class="text-danger"></span>
+        <input type="tel" <input asp-for="Phone" class="form-control" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+        placeholder="000-000-0000 Formatında Telefon Numarası" />
+    </div><br />    <div class="mb-3">
+        <span asp-validation-for="WebSite" class="text-danger"></span>
+        <input asp-for="WebSite" class="form-control" placeholder="WebSite" />
+    </div><br />    <div class="mb-3">
+        <span asp-validation-for="Address" class="text-danger"></span>
+        <input asp-for="Address" class="form-control" placeholder="Address" />
+    </div><br />    <div class="mb-3">
+        <span asp-validation-for="City" class="text-danger"></span>
+        <input asp-for="City" class="form-control" placeholder="City" />
+    </div><br />    <div class="mb-3">
+        <span asp-validation-for="Country" class="text-danger"></span>
+        <input asp-for="Country" class="form-control" placeholder="Country" />
+    </div><br />    <div class="mb-3">
+    <div class="mb-3">
+        <button class="btn btn-primary">&nbsp;&nbsp;&nbsp; Tedarikçi Ekle &nbsp;&nbsp;&nbsp;</button>
+    </div>
+</form>
+<br />
+<br />
+<br />
+<br />
+<div class="mb-3">
+    <a asp-action="GetSuppliers" asp-controller="Supplier" class="btn btn-primary">Tedarikçileri Göster</a>
+</div>
+@section Sepet {
+    <li>
+        <a asp-area="" asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+    </li>
+ }

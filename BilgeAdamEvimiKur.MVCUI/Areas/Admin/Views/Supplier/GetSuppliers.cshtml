@@ -1,0 +1,87 @@
+﻿@model IPagedList<SupplierResModel>
+
+@section UserName {
+    @ViewBag.UserName
+}
+
+<p>
+    <b>
+        @TempData["Result"]
+    </b>
+</p></br></br>
+
+<section class="panel">
+    <header class="panel-heading">
+        <h2>Tedarikçiler</h2>
+        <a asp-action="CreateSupplier" asp-controller="Supplier" class="btn btn-primary">Yeni Tedarikçi Ekle</a>
+    </header>
+    <div class="panel-body">
+        <div class="adv-table">
+            <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+                <thead>
+                    <tr>
+                        <th class="hidden-phone">ID</th>
+                        <th class="hidden-phone">SupplierName</th>
+                        <th class="hidden-phone">ContactName</th>
+                        <th class="hidden-phone">Email</th>
+                        <th class="hidden-phone">Phone</th>
+                        <th class="hidden-phone">WebSite</th>
+                        <th class="hidden-phone">Address</th>
+                        <th class="hidden-phone">City</th>
+                        <th class="hidden-phone">Country</th>
+                        <th class="hidden-phone">Status</th>
+                        <th class="hidden-phone">Update</th>
+                        <th class="hidden-phone">Delete</th>
+                        <th class="hidden-phone">Destroy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (SupplierResModel item in Model.ToList())
+                    {
+                        <tr class="gradeX">
+                            <td class="hidden-phone">@item.ID</td>
+                            <td class="hidden-phone">@item.SupplierName</td>
+                            <td class="hidden-phone">@item.ContactName</td>
+                            <td class="hidden-phone">@item.Email</td>
+                            <td class="hidden-phone">@item.Phone</td>
+                            <td class="hidden-phone">@item.WebSite</td>
+                            <td class="hidden-phone">@item.Address</td>
+                            <td class="hidden-phone">@item.City</td>
+                            <td class="hidden-phone">@item.Country</td>
+                            <td class="hidden-phone">@item.Status</td>
+                            <td class="center hidden-phone"><a asp-action="UpdateSupplier" asp-Contoller="Supplier" asp-route-id="@item.ID" class="btn btn-success">Update</a></td>
+                            <td class="center hidden-phone"><a asp-action="DeleteSupplier" asp-Contoller="Supplier" asp-route-id="@item.ID" class="btn btn-warning">Delete</a></td>
+                            <td class="center hidden-phone"><a asp-action="DestroySupplier" asp-Contoller="Supplier" asp-route-id="@item.ID" class="btn btn-danger">Destroy</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>
+
+<section class="panel">
+    <div class="panel-body">
+        <div class="pull-right">
+            <ul class="pagination pagination-sm pro-page-list">
+                @Html.PagedListPager(Model, pageNumber => Url.Action("GetSuppliers", new { pageNumber }))
+            </ul>
+        </div>
+    </div>
+</section>
+
+@section Sepet {
+    <li>
+        <a asp-area="" asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+    </li>
+ }

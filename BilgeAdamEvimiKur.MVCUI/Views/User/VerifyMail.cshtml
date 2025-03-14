@@ -1,0 +1,47 @@
+﻿@model VerifyMailReqModel
+
+@section UserName {
+    @ViewBag.UserName
+}
+
+<div>
+    <p><b>@Html.Raw(TempData["Result"])</b></p>
+</div>
+<br />
+
+<form asp-action="VerifyMail" asp-controller="User" method="post" class="p-3 w-75 m-auto">
+    <label>Email Adresini Doğrula</label>
+    <div class="mb-3">
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <input asp-for="Email" type="email" class="form-control" placeholder="Email" />
+    </div><br />
+    <div class="mb-3">
+        <button class="btn btn-primary">&nbsp;Email Adresine Doğrulama Linki Gönder &nbsp;</button>
+    </div>
+</form>
+
+@section Sepet {
+    @if (ViewBag.UserName == " Guest ")
+    {
+        <li>
+            <a asp-controller="User" asp-action="SignIn"><i class="icon-user"></i>&nbsp;&nbsp;&nbsp;SignIn</a>
+        </li>
+    }
+
+    <li>
+        <a asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+
+    @if (ViewBag.UserName != " Guest ")
+    {
+        <li>
+            <a asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+        </li>
+    }
+}

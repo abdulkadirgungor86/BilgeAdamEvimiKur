@@ -1,0 +1,217 @@
+﻿@model OrderPageVM
+@section UserName {
+    @ViewBag.UserName
+}
+
+<form id="confirmOrder" asp-controller="Shopping" asp-action="ConfirmOrder" method="post">
+    
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <h4>Kişisel Bilgiler</h4>
+        <div class="form-group">
+            <div class="col-10">
+                <span asp-validation-for="Order.NameDescription" id="nameSurnameError" class="text-danger"></span>
+                <input asp-for="Order.NameDescription" id="nameSurname"class="form-control" placeholder="Isim SoyIsim" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-10">
+                <span asp-validation-for="Order.Email" id="emailError" class="text-danger"></span>
+                <input asp-for="Order.Email" id="email" class="form-control" placeholder="Email" />
+            </div>
+        </div>
+    }
+    else
+    {
+                <h4>Kişisel Bilgi</h4>
+    }
+    <div class="form-group">
+        <div class="col-10">
+            <span asp-validation-for="Order.ShippingAddress" id="shippingAddressError" class="text-danger"></span>
+            <input asp-for="Order.ShippingAddress" id="shippingAddress" class="form-control" placeholder="Teslimat Adresi" />
+        </div>
+    </div>
+
+    <br /><br />
+    <h4>Kart Bilgileri</h4>
+    <div class="form-group">
+        <div class="col-10">
+            <span asp-validation-for="Payment.CardUserName" id="cardUserNameError" class="text-danger"></span>
+            <input asp-for="Payment.CardUserName" id="cardUserName" class="form-control" placeholder="Karttaki isim" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-10">
+            <span asp-validation-for="Payment.CardNumber" id="cardNumberError" class="text-danger"></span>
+            <input asp-for="Payment.CardNumber" id="cardNumber" class="form-control" placeholder="Kart Numarası" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-10">
+            <span asp-validation-for="Payment.ExpiryMonth" id="expiryMonthError" class="text-danger"></span>
+            <input asp-for="Payment.ExpiryMonth" class="form-control" id="expiryMonth" placeholder="Gecerlilik Süresi (Ay)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-10">
+            <span asp-validation-for="Payment.ExpiryYear" id="expiryYearError" class="text-danger"></span>
+            <input asp-for="Payment.ExpiryYear" class="form-control" id="expiryYear" placeholder="Gecerlilik Süresi (Yıl)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-10">
+            <span asp-validation-for="Payment.CVC" id="cvcError" class="text-danger"></span>
+            <input asp-for="Payment.CVC" class="form-control" id="cvc" placeholder="Güvenlik Numarası" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-10">
+            <button class="btn btn-primary">Ödemeyi Onayla</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    
+    document.getElementById('confirmOrder').addEventListener('submit', function (event) {
+        var isValid = true;
+
+    @* Razor sözdizimi burada başlıyor *@
+    @if (!User.Identity.IsAuthenticated)
+    {
+        // Kullanıcı adı doğrulaması
+        @: var nameSurname = document.getElementById('nameSurname').value;
+        @: var nameSurnameError = document.getElementById('nameSurnameError');
+        @: nameSurnameError.textContent = '';
+
+        @: if (!nameSurname) {
+        @: nameSurnameError.textContent = 'İsim Soyisim alanı boş bırakılamaz.';
+        @: isValid = false;
+        @: } else if (nameSurname.length < 4 || nameSurname.length > 50) {
+        @: nameSurnameError.textContent = 'İsim Soyisim alanı 4 ile 50 karakter arasında olmalıdır.';
+        @: isValid = false;
+        @: }
+
+        // Email doğrulaması
+        @: var email = document.getElementById('email').value;
+        @: var emailError = document.getElementById('emailError');
+        @:emailError.textContent = '';
+
+        @: if (!email) {
+        @: emailError.textContent = 'Email alanı boş bırakılamaz.';
+        @: isValid = false;
+        @: } else if (!(email.includes('\u0040') && email.split('\u0040')[1].includes('.'))) {
+        @: emailError.textContent = 'Geçerli bir email adresi giriniz.';
+        @: isValid = false;
+        @: }
+        
+     }
+    @* Razor sözdizimi burada bitiyor *@
+
+        // Teslimat adresi doğrulaması
+        var shippingAddress = document.getElementById('shippingAddress').value;
+        var shippingAddressError = document.getElementById('shippingAddressError');
+        shippingAddressError.textContent = '';
+
+        if (!shippingAddress) {
+            shippingAddressError.textContent = 'Teslimat adresi boş bırakılamaz.';
+            isValid = false;
+        } else if (shippingAddress.length < 10 || shippingAddress.length > 100) {
+            shippingAddressError.textContent = 'Teslimat adresi 10 ile 100 karakter arasında olmalıdır.';
+            isValid = false;
+        }
+
+        // Card User Name validation
+    var cardUserName = document.getElementById('cardUserName').value;
+    var cardUserNameError = document.getElementById('cardUserNameError');
+    cardUserNameError.textContent = '';
+
+    if (!cardUserName) {
+        cardUserNameError.textContent = 'Karttaki isim alanı boş bırakılamaz.';
+        isValid = false;
+    }
+
+    // Card Number validation
+    var cardNumber = document.getElementById('cardNumber').value;
+    var cardNumberError = document.getElementById('cardNumberError');
+    cardNumberError.textContent = '';
+
+    if (!cardNumber) {
+        cardNumberError.textContent = 'Kart numarası alanı boş bırakılamaz.';
+        isValid = false;
+    } else if (!/^\d{16}$/.test(cardNumber)) {
+        cardNumberError.textContent = 'Geçerli bir kart numarası girin.';
+        isValid = false;
+    }
+
+    // Expiry Month validation
+    var expiryMonth = document.getElementById('expiryMonth').value;
+    var expiryMonthError = document.getElementById('expiryMonthError');
+    expiryMonthError.textContent = '';
+
+    if (!expiryMonth) {
+        expiryMonthError.textContent = 'Geçerlilik süresi (ay) alanı boş bırakılamaz.';
+        isValid = false;
+    } else if (expiryMonth < 1 || expiryMonth > 12) {
+        expiryMonthError.textContent = 'Geçerli bir ay girin.';
+        isValid = false;
+    }
+
+    // Expiry Year validation
+    var expiryYear = document.getElementById('expiryYear').value;
+    var expiryYearError = document.getElementById('expiryYearError');
+    expiryYearError.textContent = '';
+
+    if (!expiryYear) {
+        expiryYearError.textContent = 'Geçerlilik süresi (yıl) alanı boş bırakılamaz.';
+        isValid = false;
+    } else if (expiryYear < new Date().getFullYear()) {
+        expiryYearError.textContent = 'Geçerli bir yıl girin.';
+        isValid = false;
+    }
+
+    // CVC validation
+    var cvc = document.getElementById('cvc').value;
+    var cvcError = document.getElementById('cvcError');
+    cvcError.textContent = '';
+
+    if (!cvc) {
+        cvcError.textContent = 'Güvenlik numarası alanı boş bırakılamaz.';
+        isValid = false;
+    } else if (!/^\d{3}$/.test(cvc)) {
+        cvcError.textContent = 'Geçerli bir CVC girin.';
+        isValid = false;
+    }
+
+    // Prevent form submission if any validation fails
+    if (!isValid) {
+        event.preventDefault();
+    }
+    });
+</script>
+
+@section Sepet {
+    @if (ViewBag.UserName == " Guest ")
+    {
+        <li>
+            <a asp-controller="User" asp-action="SignIn"><i class="icon-user"></i>&nbsp;&nbsp;&nbsp;SignIn</a>
+        </li>
+    }
+
+    <li>
+        <a asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+
+    @if (ViewBag.UserName != " Guest ")
+    {
+        <li>
+            <a asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+        </li>
+    }
+}

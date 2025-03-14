@@ -1,0 +1,67 @@
+﻿@section UserName {
+@ViewBag.UserName
+}
+
+<div class="text-center">
+    <h1 class="display-1">RedirectPanel Page</h1>
+    <p>
+        <b>
+           @TempData["Result"]
+        </b>
+    </p>
+    <p>(5 sn sonra anasayfaya yönlendirileceksiniz.)</p>
+    </br> </br>
+    <p>
+        Lorem ipsum odor amet, consectetuer adipiscing elit. Duis fringilla orci orci rutrum nulla commodo mattis vulputate? Euismod taciti vestibulum feugiat vulputate at, potenti ante sit. Suscipit mauris odio duis est curabitur urna. Sagittis accumsan eget curae condimentum consequat tortor massa nostra. Litora conubia porta curae consectetur vehicula condimentum fringilla varius? Himenaeos consectetur mattis viverra suscipit sodales per libero elit. Adis pellentesque penatibus et fringilla gravida eleifend fames.
+
+        Mattis tempor condimentum massa aliquam cursus dolor porta libero vitae. Vestibulum mauris conubia nulla facilisis, malesuada urna rhoncus. Ac torquent lectus nec mi interdum erat curae maecenas sociosqu. Amet interdum senectus nisl sociosqu facilisi curabitur. Feugiat elit congue justo nullam semper rhoncus. Parturient justo sodales rhoncus pharetra quam tincidunt? Arcu posuere montes arcu mauris risus ridiculus fames conubia. Sapien pharetra rutrum justo viverra himenaeos senectus diam semper ut.
+
+        Sem purus pretium vitae sit fermentum. Justo nisl diam facilisi efficitur mi posuere lectus. Non auctor curae sapien faucibus sagittis blandit amet iaculis sollicitudin. Nisi bibendum dictum est, metus dignissim nunc posuere varius porta. Ac metus etiam torquent maximus nulla etiam consequat interdum. Mollis rutrum torquent ad placerat semper semper dictum per orci. Vehicula vivamus justo donec molestie nisi donec auctor nisi. Aliquam in pulvinar nibh sollicitudin lorem varius malesuada posuere non?
+
+        Ligula interdum neque; torquent enim egestas felis quam. Consequat phasellus elementum diam; duis vivamus egestas massa. Etiam eros primis sociosqu, dictumst finibus fames. Ipsum vehicula platea orci at porttitor blandit. Vulputate mattis mus scelerisque gravida suspendisse eros luctus. Consectetur mattis suscipit habitant ac quam nulla phasellus. Imperdiet orci justo molestie iaculis fusce.
+
+        Posuere egestas semper, blandit habitant curabitur diam. Mus himenaeos congue quisque fermentum nibh. Ligula eros metus quis est diam augue velit torquent. Magna dictum nibh est elit aptent platea interdum eros sociosqu. Class massa quam feugiat imperdiet eget vivamus integer. Odio quisque vestibulum senectus morbi aenean phasellus ipsum. Dis congue at, morbi nisl potenti congue torquent magna. Aerat lorem vulputate mus tristique est etiam sapien hendrerit. Sociosqu imperdiet congue praesent feugiat lacinia purus.
+
+        Nibh sollicitudin quis congue pretium libero. Quisque class commodo augue in tempor morbi. Mauris donec cras adipiscing justo posuere risus aliquet semper. Vulputate adipiscing massa fusce dis gravida est tincidunt. Vestibulum diam ultricies praesent nullam vulputate facilisi luctus donec. Quisque diam dis pharetra bibendum libero. Tempus litora velit nec sollicitudin habitant. Suscipit sit velit conubia, neque justo vivamus malesuada hendrerit. Mus eleifend porttitor litora; placerat lorem eget. Non mi pharetra sodales quisque lectus.
+
+        Amet iaculis pharetra vestibulum, non dictumst leo ut felis. Suspendisse varius varius pulvinar elementum suscipit netus cursus. Fermentum eros vitae vehicula justo natoque amet. Natoque varius eleifend et venenatis fermentum. Aaliquet imperdiet vehicula mi nascetur. Congue etiam vivamus tempor amet aenean duis enim consectetur lacus. Commodo posuere senectus magnis eget massa adipiscing pellentesque.
+
+        Facilisis vehicula eros semper; ullamcorper dolor eget! Adipiscing interdum dictum libero dictumst praesent montes duis. Vestibulum ridiculus maximus viverra fringilla etiam sit dignissim lobortis. Iaculis ac quis potenti est, vel sed taciti nec varius. Nunc urna curae maximus tempus quisque. Vel hendrerit posuere mollis lacinia mattis orci? Proin et ipsum purus quam scelerisque.
+
+        Inceptos iaculis aliquam placerat turpis venenatis vestibulum. Eleifend suspendisse fermentum quam, magnis euismod pellentesque mus sollicitudin. Lorem congue luctus elementum bibendum netus facilisi curabitur. Nascetur semper mauris dapibus sodales ultrices; nisi fringilla orci. Dignissim purus ac; potenti ridiculus at in egestas interdum. Curabitur pulvinar tempor nostra eu pulvinar finibus dolor auctor. Sit neque rutrum facilisi facilisis congue suspendisse! Mattis sociosqu molestie tempor justo phasellus commodo iaculis magnis habitant. Venenatis arcu lacus, amet lorem posuere massa felis. Elit amet leo fermentum quam imperdiet.
+
+        Enim in rhoncus lectus placerat etiam odio a. Blandit eu erat integer, rutrum risus venenatis consequat hendrerit accumsan. Rutrum ligula ullamcorper magna praesent dui erat molestie. Nibh erat odio cras etiam urna elit pellentesque! Tempus euismod in; lectus congue gravida iaculis diam. Nullam amet elit neque auctor; et ipsum. Bibendum platea fermentum massa viverra nibh scelerisque rutrum. Luctus tempor phasellus ac proin, lectus congue quisque velit.
+    </p>
+</div>
+
+<script>
+    setTimeout(function () {
+        window.location.href = "/home/index";
+    }, 5000);
+</script>
+
+@section Sepet {
+    @if (ViewBag.UserName == " Guest ")
+    {
+        <li>
+            <a asp-controller="User" asp-action="SignIn"><i class="icon-user"></i>&nbsp;&nbsp;&nbsp;SignIn</a>
+        </li>
+    }
+
+    <li>
+        <a asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+
+    @if (ViewBag.UserName != " Guest ")
+    {
+        <li>
+            <a asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+        </li>
+    }
+}

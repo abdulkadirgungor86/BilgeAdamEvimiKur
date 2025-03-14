@@ -1,0 +1,91 @@
+﻿@model IPagedList<GetUserResModel>
+
+@section UserName {
+    @ViewBag.UserName
+}
+
+<p>
+    <b>
+        @TempData["Result"]
+    </b>
+</p></br></br>
+
+<section class="panel">
+    <header class="panel-heading">
+        <h2>Kullanıcılar</h2>
+                <a <a asp-action="Register" asp-controller="User" asp-area="" class="btn btn-primary">Yeni Kullanıcı Ekle</a>
+    </header>
+    <div class="panel-body">
+        <div class="adv-table">
+            <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+            <thead>
+                <tr>
+                    <th class="hidden-phone">Id</th>
+                    <th class="hidden-phone">Username</th>
+                    <th class="hidden-phone">Roles</th>
+                    <th class="hidden-phone">Email</th>
+                    <th class="hidden-phone">EmailConfirmed</th>
+                    <th class="hidden-phone">Status</th>
+                    <th class="hidden-phone">Update</th>
+                    <th class="hidden-phone">Delete</th>
+                    <th class="hidden-phone">Destroy</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (GetUserResModel item in Model.ToList())
+                {
+                    <tr class="gradeX">
+                        <td class="hidden-phone">@item.Id</td>
+                        <td class="hidden-phone">@item.UserName</td>
+                        <td class="hidden-phone">
+                                @{
+                                    bool first = true;
+                                }
+                                @foreach (string role in item.RoleNames)
+                                {
+                                    if (!first)
+                                    {
+                                        @:, &nbsp;
+                                    }
+                                    first = false;
+                                    @role
+                                }
+                        </td>
+                        <td class="hidden-phone">@item.Email</td>
+                        <td class="hidden-phone">@item.EmailConfirmed</td>
+                        <td class="hidden-phone">@item.Status</td>
+                        <td class="center hidden-phone"><a asp-action="UpdateUser" asp-Contoller="appUser" asp-route-id="@item.Id" asp-route-id="@item.Id" class="btn btn-success">Update</a></td>
+                        <td class="center hidden-phone"><a asp-action="DeleteUser" asp-Contoller="apppUser" asp-route-id="@item.Id" class="btn btn-warning">Delete</a></td>
+                        <td class="center hidden-phone"><a asp-action="DestroyUser" asp-Contoller="appUser" asp-route-id="@item.Id" class="btn btn-danger">Destroy</a></td>
+                    </tr>
+                }
+            </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="panel">
+    <div class="panel-body">
+        <div class="pull-right">
+            <ul class="pagination pagination-sm pro-page-list">
+                @Html.PagedListPager(Model, pageNumber => Url.Action("GetUsers", new { pageNumber }))
+            </ul>
+        </div>
+    </div>
+</section>
+
+@section Sepet {
+    <li>
+        <a asp-area="" asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+    </li>
+ }

@@ -1,0 +1,82 @@
+﻿@model UserSignInReqModel
+@section UserName {
+    @ViewBag.UserName
+}
+
+<div class="text-center">
+    <p><b>@TempData["Result"]</b></p>
+    <form id="signInJS" class="form-signin" asp-action="SignIn" asp-controller="User">
+        <div class="login-wrap">
+            <h1 class="display-1">SignIn</h1>
+            <div>
+                <span asp-validation-for="UserName" class="text-danger" id="userNameJSError"></span>
+                <input asp-for="UserName" type="text" class="form-control" id="userNameJS" placeholder="UserName">
+            </div>
+            <div>
+                <span asp-validation-for="Password" class="text-danger" id="passwordJSError"></span>
+                <input asp-for="Password" type="password" class="form-control" id="passwordJS" placeholder="Password">
+            </div>
+
+            <button class="btn btn-primary">Giriş Yap!</button>
+            <br />
+            <div class="registration">
+                Hesabınız yoksa kayıt olunuz. <br /> <a class="" href="/User/Register"> Hesap Oluştur. </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('signInJS').addEventListener('submit', function (event) {
+        var isValid = true;
+
+        // username doğrulaması
+        var userNameJS = document.getElementById('userNameJS').value;
+        var userNameJSError = document.getElementById('userNameJSError');
+        userNameJSError.textContent = '';
+
+        if (!userNameJS) {
+            userNameJSError.textContent = 'Kullanıcı adı boş bırakılamaz.';
+            isValid = false;
+        }
+
+        // Password doğrulaması
+        var passwordJS = document.getElementById('passwordJS').value;
+        var passwordJSError = document.getElementById('passwordJSError');
+        passwordJSError.textContent = '';
+
+        if (!passwordJS) {
+            passwordJSError.textContent = 'Password alanı boş bırakılamaz.';
+            isValid = false;
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+</script>
+@section Sepet {
+    @if (ViewBag.UserName == " Guest ")
+    {
+        <li>
+            <a asp-controller="User" asp-action="SignIn"><i class="icon-user"></i>&nbsp;&nbsp;&nbsp;SignIn</a>
+        </li>
+    }
+
+    <li>
+        <a asp-controller="Shopping" asp-action="CartPage"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;CardPage</a>
+    </li>
+
+    @if (ViewBag.UserName != " Guest ")
+    {
+        <li>
+            <a asp-controller="UserProfile" asp-action="UserProfile"><i class="icon-suitcase"></i>&nbsp;&nbsp;&nbsp;Profile</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="ChangePassword"><i class="icon-cog"></i>&nbsp;&nbsp;&nbsp;ChangePassword</a>
+        </li>
+        <li>
+            <a asp-controller="User" asp-action="LogOut"><i class="icon-key"></i>&nbsp;&nbsp;&nbsp;LogOut</a>
+        </li>
+    }
+}
