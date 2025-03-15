@@ -1,4 +1,4 @@
-# Hybrid N-Tier E-Commerce Project on .NET 8.0
+# Hybrid N-Tier E-Commerce Project on .NET 8.0 with C#
 
 ## Overview
 
